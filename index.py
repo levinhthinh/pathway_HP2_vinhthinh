@@ -1,9 +1,9 @@
 # import main
 
 def mua_hang_hoa(id):
+    global giohang_chitiet, giohang
     bracket=[]
     print(id)
-    global giohang_chitiet, giohang
     for x in range(len(giohang)):
         if id in giohang[x]:
             id_gio_hang=giohang[x][1]
@@ -47,12 +47,42 @@ def mua_hang_hoa(id):
     return  
 
 def kiem_tra_gio_hang(id):
-    pass
+    print(id)
+    for i in range(len(giohang)):
+        if id == giohang[i][0]:
+            id_gio_hang=giohang[i][1]
+
+    for i in range(len(giohang_chitiet)):
+        if id_gio_hang==giohang_chitiet[i][0]:
+            print(f'loai ao:{giohang_chitiet[i][1]:<8} so luong:{giohang_chitiet[i][2]:<2} gia:{giohang_chitiet[i][3]:<6}')    
+    return
+
+def tinh_tien(id):
+    print(id)
+    for i in range(len(giohang)):
+        if id == giohang[i][0]:
+            id_gio_hang=giohang[i][1]
+    tong=0
+    for i in range(len(giohang_chitiet)):
+        if id_gio_hang==giohang_chitiet[i][0]:
+            tong+=giohang_chitiet[i][2]*giohang_chitiet[i][3]
+            print(f'loai ao:{giohang_chitiet[i][1]:<8} so luong:{giohang_chitiet[i][2]:<2} gia:{giohang_chitiet[i][3]:<6}')    
+
+    print(f'tong: {tong}')
+    return tong
+
+def thoat_trinh(*any):
+    global id,quyen,using
+    id=None
+    quyen=None
+    using=False
+    print('da thoat')
+    return
 # user([id,ten,mk,id dac biet #1=super_user,0=user,)
 user=([1,'admin1','@1234',1],[2,'ad_min','1234',1],[3,'tuan','@1234',0],[4,'abc','dino',0],[5,'anh vu','HI1234',0])
 
 # giohang=[[id_user, id_giohang],]
-giohang=[[1,'GH1'],[2,'GH2'],]
+giohang=[[3,'GH1'],[4,'GH2'],]
 
 # giohang_chitiet=[[id_giohang, id_hang, so luong, gia tien],]
 giohang_chitiet=[['GH1','AL',3,200000],['GH1','ASM',2,25000]]
@@ -61,8 +91,14 @@ giohang_chitiet=[['GH1','AL',3,200000],['GH1','ASM',2,25000]]
 hanghoa = (['AL','áo len',200000,10],['ASM','áo sơmi',25000,9],['A','áo a',15000,2],['B','áo b',10000,0],['C','áo c',500,6])
 
 # menu = ([ten chuc nang, quyen duoc xem],func)
-menu=(['mua hang hoa',[0],mua_hang_hoa()],['kiem tra gio hang',[0]],['tinh tien',[0]],['kiem tra lich su mua hang',[0]],['quan li hang hoa',[1]],['quan li khach hang',[1]],['thong ke',[1]],['thoat trinh',[0,1]])
-
+menu=(['mua hang hoa',[0],{'func':mua_hang_hoa}],
+      ['kiem tra gio hang',[0],{'func':kiem_tra_gio_hang}],
+      ['tinh tien',[0],{'func':tinh_tien}],
+      ['kiem tra lich su mua hang',[0],{'func':mua_hang_hoa}],
+      ['quan li hang hoa',[1],{'func':mua_hang_hoa}],
+      ['quan li khach hang',[1],{'func':mua_hang_hoa}],
+      ['thong ke',[1],{'func':mua_hang_hoa}],
+      ['thoat trinh',[0,1],{'func':thoat_trinh}])
 while True:
     ten=input('ten tai khoan: ')
     mk=input('mat khau tai khoan: ')
@@ -76,11 +112,16 @@ while True:
     else:
         print('tên hoặc mật khẩu bị sai, hãy đăng nhập lại')
         using=False
-    # while using:
-    #     a=1
-    #     for i in range(len(menu)):
-    #         if quyen in menu[i][1]:
-    #             print(f'{a}.{menu[i][0]}')
-    #             a+=1
-    #     input('ban muon lam gi: ')
-    mua_hang_hoa(id)
+    while using:
+        print('\n')
+        user_menu=[]
+        a=1
+        for i in range(len(menu)) :
+            if quyen in menu[i][1]:
+                print(f'{a}.{menu[i][0]}')
+                user_menu.append(menu[i][2])
+                a+=1
+        print(user_menu)
+        a=int(input('ban muon lam gi: '))
+        user_menu[a-1]["func"](id)
+    print('hi hello')

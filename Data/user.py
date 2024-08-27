@@ -1,4 +1,3 @@
-user=([1,'admin1','@1234',1],[2,'ad_min','1234',1],[3,'tuan','@1234',0],[4,'abc','dino',0],[5,'anh vu','HI1234',0])
 user={
     'admin1':{
         'id':1,
@@ -31,7 +30,7 @@ role={
     'admin':{
         'menu':['quan li user', 'quan li thong ke','quan li hang hoa']
     },
-    
+
     'user':{
         'menu':['mua hang','kiem tra lich su mua','gio hang']
     }

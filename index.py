@@ -1,4 +1,4 @@
-# import main
+import gioHangChiTiet
 
 def mua_hang_hoa(id):
     global giohang_chitiet, giohang
@@ -46,16 +46,7 @@ def mua_hang_hoa(id):
     print(giohang_chitiet)
     return  
 
-def kiem_tra_gio_hang(id):
-    print(id)
-    for i in range(len(giohang)):
-        if id == giohang[i][0]:
-            id_gio_hang=giohang[i][1]
 
-    for i in range(len(giohang_chitiet)):
-        if id_gio_hang==giohang_chitiet[i][0]:
-            print(f'loai ao:{giohang_chitiet[i][1]:<8} so luong:{giohang_chitiet[i][2]:<2} gia:{giohang_chitiet[i][3]:<6}')    
-    return
 
 def tinh_tien(id):
     print(id)
@@ -90,9 +81,9 @@ giohang_chitiet=[['GH1','AL',3,200000],['GH1','ASM',2,25000]]
 # hanghoa=(['id_hang','ten', 'gia tien', 'hang ton'])
 hanghoa = (['AL','áo len',200000,10],['ASM','áo sơmi',25000,9],['A','áo a',15000,2],['B','áo b',10000,0],['C','áo c',500,6])
 
-# menu = ([ten chuc nang, quyen duoc xem],func)
+# menu = ([ten chuc nang, quyen duoc    ],func)
 menu=(['mua hang hoa',[0],{'func':mua_hang_hoa}],
-      ['kiem tra gio hang',[0],{'func':kiem_tra_gio_hang}],
+      ['kiem tra gio hang',[0],{'func':gioHangChiTiet.kiem_tra_gio_hang}],
       ['tinh tien',[0],{'func':tinh_tien}],
       ['kiem tra lich su mua hang',[0],{'func':mua_hang_hoa}],
       ['quan li hang hoa',[1],{'func':mua_hang_hoa}],
@@ -125,3 +116,11 @@ while True:
         a=int(input('ban muon lam gi: '))
         user_menu[a-1]["func"](id)
     print('hi hello')
+
+
+    gioHangChiTiet.kiem_tra_gio_hang(id, giohang,giohang_chitiet)
+
+
+
+# Làm sạch code
+# Tối ưu hóa code - dễ sửa dễ nâng cấp
